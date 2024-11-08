@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using DocumentFormat.OpenXml.EMMA;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NopCommerce.Models;
@@ -18,6 +19,7 @@ public class PayController : ControllerBase
         _logger = logger;
     }
 
+    [AllowAnonymous]
     [HttpPost("create-payment")]
     public async Task<IActionResult> CreatePayment(PaymentDto payment)
     {
