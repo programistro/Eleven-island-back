@@ -49,13 +49,13 @@ public class Package
     public string Number { get; set; }
     public string Comment { get; set; }
     public int Height { get; set; }
-    public List<Item> Items { get; set; }
+    public List<Items> Items { get; set; }
     public int Length { get; set; }
     public int Weight { get; set; }
     public int Width { get; set; }
 }
 
-public class Item
+public class Items
 {
     public string WareKey { get; set; }
     public Payment Payment { get; set; }
