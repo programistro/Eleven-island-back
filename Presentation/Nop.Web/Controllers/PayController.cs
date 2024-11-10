@@ -10,7 +10,7 @@ using NopCommerce.Models;
 namespace Nop.Web.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class PayController : ControllerBase
 {
     private readonly ILogger<PayController> _logger;
