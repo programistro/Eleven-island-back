@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.EMMA;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Nop.Web.Service;
 using NopCommerce.Models;
 
 namespace Nop.Web.Controllers;
@@ -17,6 +18,23 @@ public class PayController : ControllerBase
     public PayController(ILogger<PayController> logger)
     {
         _logger = logger;
+    }
+
+    [AllowAnonymous]
+    [HttpPost("create-order")]
+    public async Task<IActionResult> CreateOrder(NopCommerce.Models.CDEK.Order order)
+    {
+        if (order == null)
+        {
+            return BadRequest();
+        }
+        
+        var client = new ClientCDEK("2C5aVo5xBEQk83PNTaKcvpwHM9YKrkjc", "VXGbhYoE3zVDqlysEBGU7M71Blg0Tc5Z");
+// Console.WriteLine(await client.CalculatePrice("Ижевск", 12, 0.07));
+
+        var line = await client.SendOrder(order);
+        
+        return Ok(line);
     }
 
     [AllowAnonymous]
