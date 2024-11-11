@@ -52,10 +52,10 @@ public class PayController : ControllerBase
 
             int fullAnmount = 0;
 
-            foreach (var item in payment.Items)
-            {
-                fullAnmount += item.Amount;
-            }
+            // foreach (var item in payment.Items)
+            // {
+            //     fullAnmount += item.Amount;
+            // }
             
             // 1728391757593DEMO
             // p8h3wOZ6LlauQckv
@@ -63,7 +63,7 @@ public class PayController : ControllerBase
             Payment rootObject = new()
             {
                 TerminalKey = "1728391757616",
-                Amount = fullAnmount,
+                Amount = payment.Anmount,
                 OrderId = orderId,
                 Description = payment.Discription,
                 Token = "4d80aabfc960d3fe58803302d5af8eee306993e3e6c3ee87a3ac59f60a3240f2",
