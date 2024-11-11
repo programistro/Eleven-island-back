@@ -22,7 +22,7 @@ public class ClientCDEK
 
     public async Task<string> SendOrder(Order order)
     {
-        string urlRequest = "https://api.edu.cdek.ru/v2/orders";
+        string urlRequest = "https://api.cdek.ru/v2/orders";
 
 
         using (HttpClient client = new HttpClient())
