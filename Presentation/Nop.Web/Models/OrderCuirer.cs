@@ -1,4 +1,6 @@
-﻿namespace Nop.Web.Models;
+﻿using NopCommerce.Models.CDEK;
+
+namespace Nop.Web.Models;
 
 public class OrderCuirer
 {
@@ -27,11 +29,6 @@ public class Contact
     public string Company { get; set; }
     public string Name { get; set; }
     public List<Phone> Phones { get; set; }
-}
-
-public class Phone
-{
-    public string Number { get; set; }
 }
 
 public class Location
