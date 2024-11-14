@@ -9,14 +9,17 @@ public class WTelegramService : BackgroundService
     public readonly WTelegram.Client Client;
     public TL.User User => Client.User;
     static WTelegram.UpdateManager Manager;
+    private readonly IServiceScopeFactory scopeFactory;
 
+    public string ConfigNeeded = "connecting";
     private readonly IConfiguration _config;
 
     public WTelegramService(IConfiguration config, ILogger<WTelegramService> logger)
     {
         _config = config;
+        this.scopeFactory = scopeFactory;
         WTelegram.Helpers.Log = (lvl, msg) => logger.Log((LogLevel)lvl, msg);
-        Client = new WTelegram.Client(what => Config(what));
+        Client = new WTelegram.Client(what => _config[what]);
     }
 
     public override void Dispose()
@@ -27,7 +30,12 @@ public class WTelegramService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        
+        ConfigNeeded = await DoLogin(_config["phone_number"]);
+    }
+    
+    public async Task<string> DoLogin(string loginInfo)
+    {
+        return ConfigNeeded = await Client.Login(loginInfo);
     }
 
     public async Task SendMessage(OrderTg orderTg)
@@ -37,18 +45,5 @@ public class WTelegramService : BackgroundService
         var chat = chats.chats[1].ToInputPeer();
 
         await Client.SendMessageAsync(chat, "");
-    }
-    
-    private string Config(string what)
-    {
-        switch (what)
-        {
-            case "api_id": return "25421922";
-            case "api_hash": return "8ed9b2cb68b4b22166105e81ddafb969";
-            case "phone_number": return "+79204489841";
-            case "verification_code": Console.Write("Code: "); return Console.ReadLine();
-            case "password": return "Roman2021090";
-            default: return null;                  // let WTelegramClient decide the default config
-        }
     }
 }
