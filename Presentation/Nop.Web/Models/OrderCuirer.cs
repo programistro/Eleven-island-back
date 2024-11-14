@@ -19,7 +19,7 @@ public class OrderCuirer
 
     public Contact Sender { get; set; }
 
-    public Location FromLocation { get; set; }
+    public Location1 FromLocation { get; set; }
 
     public bool NeedCall { get; set; }
 }
@@ -31,7 +31,7 @@ public class Contact
     public List<Phone> Phones { get; set; }
 }
 
-public class Location
+public class Location1
 {
     public string Code { get; set; }
     public Guid FiasGuid { get; set; }
