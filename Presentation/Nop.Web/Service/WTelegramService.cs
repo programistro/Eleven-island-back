@@ -55,7 +55,7 @@ public class WTelegramService : BackgroundService
     {
         var chats = await Client.Messages_GetAllChats(); // chats = groups/channels (does not include users dialogs)
         Console.WriteLine("This user has joined the following:");
-        var chat = chats.chats[1].ToInputPeer();
+        var chat = chats.chats[4507299236].ToInputPeer();
 
         await Client.SendMessageAsync(chat, "");
     }
