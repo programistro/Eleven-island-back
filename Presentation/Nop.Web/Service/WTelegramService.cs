@@ -32,7 +32,7 @@ public class WTelegramService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        ConfigNeeded = await DoLogin(Config("+79161176266"));
+        ConfigNeeded = await DoLogin(Config("phone_number"));
     }
     
     private string Config(string what)
@@ -41,7 +41,7 @@ public class WTelegramService : BackgroundService
         {
             case "api_id": return "25421922";
             case "api_hash": return "8ed9b2cb68b4b22166105e81ddafb969";
-            case "phone_number": return Phone;
+            case "phone_number": return "+79161176266";
             default: return null;                  // let WTelegramClient decide the default config
         }
     }
