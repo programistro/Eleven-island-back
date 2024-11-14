@@ -2,9 +2,11 @@
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
 using Nop.Web.Framework.Infrastructure.Extensions;
+using Nop.Web.Service;
+using Telegram.Bot;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSingleton<WTelegramService>();
 builder.Configuration.AddJsonFile(NopConfigurationDefaults.AppSettingsFilePath, true, true);
 if (!string.IsNullOrEmpty(builder.Environment?.EnvironmentName))
 {

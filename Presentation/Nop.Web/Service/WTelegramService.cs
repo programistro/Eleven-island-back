@@ -1,0 +1,54 @@
+﻿using Nop.Web.Models;
+using TL;
+using WTelegram.Types;
+
+namespace Nop.Web.Service;
+
+public class WTelegramService : BackgroundService
+{
+    public readonly WTelegram.Client Client;
+    public TL.User User => Client.User;
+    static WTelegram.UpdateManager Manager;
+
+    private readonly IConfiguration _config;
+
+    public WTelegramService(IConfiguration config, ILogger<WTelegramService> logger)
+    {
+        _config = config;
+        WTelegram.Helpers.Log = (lvl, msg) => logger.Log((LogLevel)lvl, msg);
+        Client = new WTelegram.Client(what => Config(what));
+    }
+
+    public override void Dispose()
+    {
+        Client.Dispose();
+        base.Dispose();
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        
+    }
+
+    public async Task SendMessage(OrderTg orderTg)
+    {
+        var chats = await Client.Messages_GetAllChats(); // chats = groups/channels (does not include users dialogs)
+        Console.WriteLine("This user has joined the following:");
+        var chat = chats.chats[1].ToInputPeer();
+
+        await Client.SendMessageAsync(chat, "");
+    }
+    
+    private string Config(string what)
+    {
+        switch (what)
+        {
+            case "api_id": return "25421922";
+            case "api_hash": return "8ed9b2cb68b4b22166105e81ddafb969";
+            case "phone_number": return "+79204489841";
+            case "verification_code": Console.Write("Code: "); return Console.ReadLine();
+            case "password": return "Roman2021090";
+            default: return null;                  // let WTelegramClient decide the default config
+        }
+    }
+}

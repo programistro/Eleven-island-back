@@ -66,6 +66,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="WTelegramBot" Version="7.10.2" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.
