@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Nop.Web.Models;
 using NopCommerce.Models.CDEK;
 using Payment = NopCommerce.Models.Payment;
 
@@ -107,6 +108,34 @@ public class ClientCDEK
             //     },
             //     TariffCode = 139,
             // };
+
+            var jsonContent = JsonConvert.SerializeObject(order);
+
+            StringContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _accessToken);
+            HttpResponseMessage response = await client.PostAsync(urlRequest, content);
+
+            Console.WriteLine(response.IsSuccessStatusCode);
+            Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+            }
+
+            Console.WriteLine("Error: " + response.StatusCode);
+
+            return await response.Content.ReadAsStringAsync();
+        }
+    }
+    
+    public async Task<string> SendOrderCuirer(OrderCuirer order)
+    {
+        string urlRequest = "https://api.edu.cdek.ru/v2/intakes";
+
+
+        using (HttpClient client = new HttpClient())
+        {
 
             var jsonContent = JsonConvert.SerializeObject(order);
 

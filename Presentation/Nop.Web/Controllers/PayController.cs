@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.EMMA;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Nop.Web.Models;
 using Nop.Web.Service;
 using NopCommerce.Models;
 
@@ -14,13 +15,14 @@ namespace Nop.Web.Controllers;
 public class PayController : ControllerBase
 {
     private readonly ILogger<PayController> _logger;
+    private readonly WTelegramService WT;
 
-    public PayController(ILogger<PayController> logger)
+    public PayController(ILogger<PayController> logger, WTelegramService wt)
     {
         _logger = logger;
+        WT = wt;
     }
 
-    [AllowAnonymous]
     [HttpPost("create-order")]
     public async Task<IActionResult> CreateOrder(NopCommerce.Models.CDEK.Order order)
     {
@@ -36,8 +38,25 @@ public class PayController : ControllerBase
         
         return Ok(line);
     }
+    
+    
+    [HttpPost("create-order-cuirer")]
+    public async Task<IActionResult> CreateOrderCuruire(OrderCuirer order)
+    {
+        if (order == null)
+        {
+            return BadRequest();
+        }
+        
+        var client = new ClientCDEK("2C5aVo5xBEQk83PNTaKcvpwHM9YKrkjc", "VXGbhYoE3zVDqlysEBGU7M71Blg0Tc5Z");
 
-    [AllowAnonymous]
+        var line = await client.SendOrderCuirer(order);
+
+        await WT.SendMessage(order);
+        
+        return Ok(line);
+    }
+
     [HttpPost("create-payment")]
     public async Task<IActionResult> CreatePayment(PaymentDto payment)
     {

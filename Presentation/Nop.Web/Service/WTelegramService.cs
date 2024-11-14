@@ -1,4 +1,5 @@
-﻿using Nop.Web.Models;
+﻿using LinqToDB;
+using Nop.Web.Models;
 using TL;
 using WTelegram.Types;
 
@@ -51,12 +52,19 @@ public class WTelegramService : BackgroundService
         return ConfigNeeded = await Client.Login(loginInfo);
     }
 
-    public async Task SendMessage(OrderTg orderTg)
+    public async Task SendMessage(OrderCuirer orderTg)
     {
         var chats = await Client.Messages_GetAllChats(); // chats = groups/channels (does not include users dialogs)
         Console.WriteLine("This user has joined the following:");
         var chat = chats.chats[4507299236].ToInputPeer();
 
-        await Client.SendMessageAsync(chat, "");
+        var message = $"Заказ номер: \"{orderTg.CdekNumber}\"\n" +
+                      $"Дата: {orderTg.IntakeDate}\n" +
+                      $"Сумма заказа:\n" +
+                      $"Город: {orderTg.FromLocation.City ?? "-"}\n" +
+                      $"Адрес: {orderTg.FromLocation.Address ?? "-"}\n" +
+                      $"Коментарий курьеру: {orderTg.Comment ?? "-"}\n";                     
+        
+        await Client.SendMessageAsync(chat, message);
     }
 }
