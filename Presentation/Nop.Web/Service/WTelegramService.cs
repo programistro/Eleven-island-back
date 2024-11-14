@@ -13,13 +13,15 @@ public class WTelegramService : BackgroundService
 
     public string ConfigNeeded = "connecting";
     private readonly IConfiguration _config;
+    
+    private string Phone { get; set; }
 
     public WTelegramService(IConfiguration config, ILogger<WTelegramService> logger)
     {
         _config = config;
         this.scopeFactory = scopeFactory;
         WTelegram.Helpers.Log = (lvl, msg) => logger.Log((LogLevel)lvl, msg);
-        Client = new WTelegram.Client(what => _config[what]);
+        Client = new WTelegram.Client(what => Config(what));
     }
 
     public override void Dispose()
@@ -30,7 +32,18 @@ public class WTelegramService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        ConfigNeeded = await DoLogin(_config["phone_number"]);
+        ConfigNeeded = await DoLogin(Config("+79161176266"));
+    }
+    
+    private string Config(string what)
+    {
+        switch (what)
+        {
+            case "api_id": return "25421922";
+            case "api_hash": return "8ed9b2cb68b4b22166105e81ddafb969";
+            case "phone_number": return Phone;
+            default: return null;                  // let WTelegramClient decide the default config
+        }
     }
     
     public async Task<string> DoLogin(string loginInfo)
