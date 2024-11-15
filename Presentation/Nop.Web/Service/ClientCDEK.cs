@@ -21,93 +21,93 @@ public class ClientCDEK
         RenewAccessToken().Wait();
     }
 
-    public async Task<string> SendOrder(Order order)
+    public async Task<string> SendOrder(Order order1)
     {
         string urlRequest = "https://api.cdek.ru/v2/orders";
 
 
         using (HttpClient client = new HttpClient())
         {
-            // Order order = new Order
-            // {
-            //     Number = "ddOererre7450813980068",
-            //     Comment = "Новый заказ",
-            //     DeliveryRecipientCost = new DeliveryRecipientCost { Value = 50 },
-            //     DeliveryRecipientCostAdv = new List<DeliveryRecipientCostAdv>
-            //     {
-            //         new DeliveryRecipientCostAdv { Sum = 3000, Threshold = 200 }
-            //     },
-            //     FromLocation = new Location
-            //     {
-            //         Code = "44",
-            //         FiasGuid = Guid.NewGuid().ToString(),
-            //         PostalCode = "",
-            //         Longitude = "",
-            //         Latitude = "",
-            //         CountryCode = "",
-            //         Region = "72",
-            //         SubRegion = "",
-            //         City = "Москва",
-            //         KladrCode = "1",
-            //         Address = "пр. Ленинградский, д.4"
-            //     },
-            //     ToLocation = new Location
-            //     {
-            //         Code = "270",
-            //         FiasGuid = Guid.NewGuid().ToString(),
-            //         PostalCode = "",
-            //         Longitude = "",
-            //         Latitude = "",
-            //         CountryCode = "",
-            //         Region = "",
-            //         SubRegion = "",
-            //         City = "Новосибирск",
-            //         KladrCode = "",
-            //         Address = "ул. Блюхера, 32"
-            //     },
-            //     Packages = new List<Package>
-            //     {
-            //         new Package
-            //         {
-            //             Number = "bar-001",
-            //             Comment = "Упаковка",
-            //             Height = 10,
-            //             Items = new List<Item>
-            //             {
-            //                 new Item
-            //                 {
-            //                     WareKey = "00055",
-            //                     Payment = new NopCommerce.Models.CDEK.Payment { Value = 3000 },
-            //                     Name = "Товар",
-            //                     Cost = 300,
-            //                     Amount = 2,
-            //                     Weight = 700,
-            //                     Url = "www.item.ru"
-            //                 }
-            //             },
-            //             Length = 10,
-            //             Weight = 4000,
-            //             Width = 10
-            //         }
-            //     },
-            //     Recipient = new Recipient
-            //     {
-            //         Name = "Иванов Иван",
-            //         Phones = new List<Phone>
-            //         {
-            //             new Phone { Number = "+79134637228" }
-            //         }
-            //     },
-            //     Sender = new Sender
-            //     {
-            //         Name = "Петров Петр"
-            //     },
-            //     Services = new List<NopCommerce.Models.CDEK.Service>
-            //     {
-            //         new NopCommerce.Models.CDEK.Service { Code = "SECURE_PACKAGE_A2" }
-            //     },
-            //     TariffCode = 139,
-            // };
+            Order order = new Order
+            {
+                Number = "ddOererre7450813980068",
+                Comment = "Новый заказ",
+                DeliveryRecipientCost = new DeliveryRecipientCost { Value = 50 },
+                DeliveryRecipientCostAdv = new List<DeliveryRecipientCostAdv>
+                {
+                    new DeliveryRecipientCostAdv { Sum = 3000, Threshold = 200 }
+                },
+                FromLocation = new Location
+                {
+                    Code = "44",
+                    FiasGuid = Guid.NewGuid().ToString(),
+                    PostalCode = "",
+                    Longitude = "",
+                    Latitude = "",
+                    CountryCode = "",
+                    Region = "72",
+                    SubRegion = "",
+                    City = "Москва",
+                    KladrCode = "1",
+                    Address = "пр. Ленинградский, д.4"
+                },
+                ToLocation = new Location
+                {
+                    Code = "270",
+                    FiasGuid = Guid.NewGuid().ToString(),
+                    PostalCode = "",
+                    Longitude = "",
+                    Latitude = "",
+                    CountryCode = "",
+                    Region = "",
+                    SubRegion = "",
+                    City = "Новосибирск",
+                    KladrCode = "",
+                    Address = "ул. Блюхера, 32"
+                },
+                Packages = new List<Package>
+                {
+                    new Package
+                    {
+                        Number = "bar-001",
+                        Comment = "Упаковка",
+                        Height = 10,
+                        Items = new List<Items>
+                        {
+                            new Items
+                            {
+                                WareKey = "00055",
+                                Payment = new NopCommerce.Models.CDEK.Payment { Value = 3000 },
+                                Name = "Товар",
+                                Cost = 300,
+                                Amount = 2,
+                                Weight = 700,
+                                Url = "www.item.ru"
+                            }
+                        },
+                        Length = 10,
+                        Weight = 4000,
+                        Width = 10
+                    }
+                },
+                Recipient = new Recipient
+                {
+                    Name = "Иванов Иван",
+                    Phones = new List<Phone>
+                    {
+                        new Phone { Number = "+79134637228" }
+                    }
+                },
+                Sender = new Sender
+                {
+                    Name = "Петров Петр"
+                },
+                Services = new List<NopCommerce.Models.CDEK.Service>
+                {
+                    new NopCommerce.Models.CDEK.Service { Code = "SECURE_PACKAGE_A2" }
+                },
+                TariffCode = 139,
+            };
 
             var jsonContent = JsonConvert.SerializeObject(order);
 
