@@ -5,89 +5,89 @@ using System.Collections.Generic;
 
 public class Order
 {
-    public string Number { get; set; }
-    public string Comment { get; set; }
-    public DeliveryRecipientCost DeliveryRecipientCost { get; set; }
-    public List<DeliveryRecipientCostAdv> DeliveryRecipientCostAdv { get; set; }
-    public Location FromLocation { get; set; }
-    public Location ToLocation { get; set; }
-    public List<Package> Packages { get; set; }
-    public Recipient Recipient { get; set; }
-    public Sender Sender { get; set; }
-    public List<Service> Services { get; set; }
-    public int TariffCode { get; set; }
+    public string number { get; set; }
+    public string comment { get; set; }
+    public DeliveryRecipientCost deliveryRecipientCost { get; set; }
+    public List<DeliveryRecipientCostAdv> deliveryRecipientCostAdv { get; set; }
+    public Location fromLocation { get; set; }
+    public Location toLocation { get; set; }
+    public List<Package> packages { get; set; }
+    public Recipient recipient { get; set; }
+    public Sender sender { get; set; }
+    public List<Service> services { get; set; }
+    public int tariffCode { get; set; }
 }
 
 public class DeliveryRecipientCost
 {
-    public decimal Value { get; set; }
+    public decimal value { get; set; }
 }
 
 public class DeliveryRecipientCostAdv
 {
-    public decimal Sum { get; set; }
-    public decimal Threshold { get; set; }
+    public decimal sum { get; set; }
+    public decimal threshold { get; set; }
 }
 
 public class Location
 {
-    public string Code { get; set; }
-    public string FiasGuid { get; set; }
-    public string PostalCode { get; set; }
-    public string Longitude { get; set; }
-    public string Latitude { get; set; }
-    public string CountryCode { get; set; }
-    public string Region { get; set; }
-    public string SubRegion { get; set; }
-    public string City { get; set; }
-    public string KladrCode { get; set; }
-    public string Address { get; set; }
+    public string code { get; set; }
+    public string fiasGuid { get; set; }
+    public string postalCode { get; set; }
+    public string longitude { get; set; }
+    public string latitude { get; set; }
+    public string countryCode { get; set; }
+    public string region { get; set; }
+    public string subRegion { get; set; }
+    public string city { get; set; }
+    public string kladrCode { get; set; }
+    public string address { get; set; }
 }
 
 public class Package
 {
-    public string Number { get; set; }
-    public string Comment { get; set; }
-    public int Height { get; set; }
-    public List<Items> Items { get; set; }
-    public int Length { get; set; }
-    public int Weight { get; set; }
-    public int Width { get; set; }
+    public string number { get; set; }
+    public string comment { get; set; }
+    public int height { get; set; }
+    public List<Items> items { get; set; }
+    public int length { get; set; }
+    public int weight { get; set; }
+    public int width { get; set; }
 }
 
 public class Items
 {
-    public string WareKey { get; set; }
-    public Payment Payment { get; set; }
-    public string Name { get; set; }
-    public decimal Cost { get; set; }
-    public int Amount { get; set; }
-    public int Weight { get; set; }
-    public string Url { get; set; }
+    public string wareKey { get; set; }
+    public Payment payment { get; set; }
+    public string name { get; set; }
+    public decimal cost { get; set; }
+    public int amount { get; set; }
+    public int weight { get; set; }
+    public string url { get; set; }
 }
 
 public class Payment
 {
-    public decimal Value { get; set; }
+    public decimal value { get; set; }
 }
 
 public class Recipient
 {
-    public string Name { get; set; }
-    public List<Phone> Phones { get; set; }
+    public string name { get; set; }
+    public List<Phone> phones { get; set; }
 }
 
 public class Phone
 {
-    public string Number { get; set; }
+    public string number { get; set; }
 }
 
 public class Sender
 {
-    public string Name { get; set; }
+    public string name { get; set; }
 }
 
 public class Service
 {
-    public string Code { get; set; }
+    public string code { get; set; }
 }
